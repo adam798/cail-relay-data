@@ -1,0 +1,110 @@
+{
+ "note": "Backup responses for the CPU 3 demo (INC-002). Used only when demo-backup mode is on or the live AI fails. Replace with real live-AI answers after testing.",
+ "responses": [
+  {
+   "id": "q1_latency",
+   "match": [
+    "latency",
+    "slow",
+    "why",
+    "what happened",
+    "what's wrong",
+    "whats wrong"
+   ],
+   "reply": {
+    "answer": "CPU 3 failed at 14:30 (ASAP alert). Its programs moved to CPU 1, which is now about 97% busy, so transactions take more than twice as long (about 138 ms instead of ~55 ms). The system is still running, but with less capacity. Let's confirm which programs moved with a read-only check.",
+    "evidence": [
+     "ASAP 14:30 CRIT: CPU 3 down, hardware fault",
+     "MOMI 14:30: process pairs taken over from CPU 3",
+     "CPU 1 at ~97% since 14:30",
+     "Response time ~138 ms vs ~55 ms normal",
+     "Prognosis 14:33: backout rate 1.7%"
+    ],
+    "likely_cause": "CPU 3 hardware failure; CPU 1 carrying its load",
+    "suggested_command": "STATUS *, CPU 3",
+    "risk": "SAFE",
+    "needs_senior": false,
+    "why": "Lists the programs that were on CPU 3 and confirms their backups took over. It changes nothing.",
+    "source": "TACL Reference Manual: STATUS; Runbook RB-009 (M. Chen, reviewed by R. Diaz)",
+    "confidence": "HIGH",
+    "next_if_confirmed": "Escalate: hardware support + load rebalance (HIGH RISK, senior sign-off).",
+    "offer_save_to_knowledge": false
+   }
+  },
+  {
+   "id": "q2_after_status",
+   "match": [
+    "output",
+    "status *, cpu 3",
+    "mean",
+    "explain",
+    "result"
+   ],
+   "reply": {
+    "answer": "Good news: every program that was on CPU 3 is still running. Their backups took over on CPU 1 and CPU 0, so no services are down. The risk is that these programs now have no backup until CPU 3 is repaired, and CPU 1 is overloaded. A second failure could stop payments. This needs hardware support and a senior to rebalance the load.",
+    "evidence": [
+     "All process pairs running",
+     "No backups available until CPU 3 is reloaded",
+     "CPU 1 at ~97%"
+    ],
+    "likely_cause": "CPU 3 hardware fault; system running without spare capacity",
+    "suggested_command": "ESCALATE: hardware support + rebalance",
+    "risk": "HIGH RISK",
+    "needs_senior": true,
+    "why": "Only HPE support can replace or reload CPU 3, and moving load off CPU 1 changes the live system, so a senior must approve. Runbook RB-009 says: do not reload the CPU yourself.",
+    "source": "Runbook RB-009 (M. Chen, reviewed by R. Diaz)",
+    "confidence": "HIGH",
+    "next_if_confirmed": "Request sign-off from R. Diaz (on call).",
+    "offer_save_to_knowledge": false
+   }
+  },
+  {
+   "id": "q3_after_escalation",
+   "match": [
+    "fixed",
+    "resolved",
+    "escalat",
+    "done",
+    "what now",
+    "next",
+    "approved"
+   ],
+   "reply": {
+    "answer": "Resolved. HPE support ticket HW-5521 was opened, R. Diaz approved the load rebalance at 14:52, and CPU 3 was reloaded at 14:55. Process pairs are restored and CPU 1's load is falling back to normal. Note: TMF backouts can stay high for a few minutes after a takeover. R. Diaz has submitted a note about this (RB-048), but it's unverified until a second senior reviews it.",
+    "evidence": [
+     "Ticket HW-5521 opened",
+     "Rebalance approved by R. Diaz 14:52",
+     "CPU 3 reloaded 14:55"
+    ],
+    "likely_cause": "Incident resolved",
+    "suggested_command": null,
+    "risk": null,
+    "needs_senior": false,
+    "why": "No further action needed. Keep watching CPU 1 and TMF backouts for 15 minutes.",
+    "source": "Runbook RB-009; pending note RB-048 (unverified, awaiting review)",
+    "confidence": "HIGH",
+    "next_if_confirmed": "Save this incident's fix to the knowledge base for review.",
+    "offer_save_to_knowledge": true
+   }
+  },
+  {
+   "id": "fallback",
+   "match": [],
+   "reply": {
+    "answer": "I'm not sure about that one. Based on the current alerts, CPU 3 is down and CPU 1 is overloaded. I'd check with the on-call senior, R. Diaz, before taking any action.",
+    "evidence": [
+     "ASAP 14:30 CRIT: CPU 3 down"
+    ],
+    "likely_cause": "CPU 3 hardware failure",
+    "suggested_command": null,
+    "risk": null,
+    "needs_senior": true,
+    "why": "Low confidence: the question is outside the information I have.",
+    "source": "Current alerts",
+    "confidence": "LOW",
+    "next_if_confirmed": "Ask R. Diaz (on call).",
+    "offer_save_to_knowledge": false
+   }
+  }
+ ]
+}

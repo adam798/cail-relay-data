@@ -1,4 +1,48 @@
 {
+ "PEEK /CPU 1/": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "Show CPU 1 load and memory (it takes over work when another CPU fails)",
+  "source": "PEEK Reference Manual",
+  "output": {
+   "during_INC-002": [
+    "CPU 1  Busy 97%  Dispatches/s 21,300  Mem used 83%"
+   ],
+   "normal": [
+    "CPU 1  Busy 41%  Dispatches/s 7,100  Mem used 60%"
+   ]
+  }
+ },
+ "STATUS *, CPU 3": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "List processes that were running on CPU 3 and confirm their backups took over",
+  "source": "TACL Reference Manual: STATUS",
+  "output": {
+   "during_INC-002": [
+    "CPU 3 not available",
+    "$PAY1   primary now CPU 1 (backup took over 14:30)",
+    "$TMP    primary now CPU 1 (backup took over 14:30)",
+    "$ZTC0   primary now CPU 0 (backup took over 14:30)",
+    "All process pairs running. No backups available until CPU 3 is reloaded."
+   ]
+  }
+ },
+ "ESCALATE: hardware support + rebalance": {
+  "risk": "HIGH RISK",
+  "changes_system": true,
+  "needs_senior": true,
+  "purpose": "Call HPE hardware support to replace/reload CPU 3, and have a senior rebalance load off CPU 1",
+  "impact": "Until CPU 3 is back, the system has no spare capacity; a second failure could stop services",
+  "source": "Runbook RB-009 (senior note)",
+  "output": {
+   "during_INC-002": [
+    "Ticket HW-5521 opened with HPE support (CPU 3 fault)",
+    "R. Diaz approved load rebalance at 14:52",
+    "14:55 CPU 3 reloaded. Process pairs restored. CPU 1 load falling."
+   ]
+  }
+ },
  "STATUS $PAY1, DETAIL": {
   "risk": "SAFE",
   "changes_system": false,
