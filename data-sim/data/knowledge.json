@@ -1,0 +1,99 @@
+{
+ "review_rules": [
+  "Only senior operators can submit a new fix to the knowledge base.",
+  "A submission needs approval from a second, different senior operator before it is used.",
+  "The submitter can never approve their own submission.",
+  "The AI only cites APPROVED entries as guidance. PENDING entries are shown as 'unverified, awaiting review'.",
+  "Rejected entries are kept in the audit log with the reviewer's reason."
+ ],
+ "entries": [
+  {
+   "id": "RB-009",
+   "title": "CPU down: check capacity before restart",
+   "incident_type": "cpu_failure",
+   "steps": [
+    "PEEK each remaining CPU to confirm takeover and load",
+    "TMFCOM STATUS TMF to check backouts",
+    "Call hardware support; do not reload the CPU yourself",
+    "If any CPU stays above 90% for 10+ minutes, escalate to rebalance load"
+   ],
+   "source_type": "senior_note",
+   "status": "approved",
+   "submitted_by": "sr-mchen",
+   "submitted_at": "2026-09-02T10:15",
+   "reviewed_by": "sr-rdiaz",
+   "reviewed_at": "2026-09-02T16:40",
+   "times_used": 18
+  },
+  {
+   "id": "RB-012",
+   "title": "Looping payment server: switch to backup",
+   "incident_type": "process_loop",
+   "steps": [
+    "STATUS $PAY1, DETAIL: check busy %, queue and last I/O",
+    "If busy > 90%, queue growing and no I/O for 5+ minutes, it is looping",
+    "Confirm the backup process is READY",
+    "SWITCH $PAY1 (HIGH RISK, senior sign-off)"
+   ],
+   "source_type": "senior_note",
+   "status": "approved",
+   "submitted_by": "sr-rdiaz",
+   "submitted_at": "2026-08-14T03:05",
+   "reviewed_by": "sr-mchen",
+   "reviewed_at": "2026-08-14T09:20",
+   "times_used": 31
+  },
+  {
+   "id": "RB-031",
+   "title": "Disk over 90%: find large audit files first",
+   "incident_type": "disk_full",
+   "steps": [
+    "SCF STATUS DISK $DATA01",
+    "FUP INFO $DATA01.AUDIT.* to list large files",
+    "Purge only files confirmed archived (CAUTION)"
+   ],
+   "source_type": "past_incident",
+   "status": "approved",
+   "submitted_by": "sr-mchen",
+   "submitted_at": "2026-07-21T20:55",
+   "reviewed_by": "sr-rdiaz",
+   "reviewed_at": "2026-07-22T08:10",
+   "times_used": 12
+  },
+  {
+   "id": "RB-048",
+   "title": "TMF backouts stay high after CPU takeover: wait before acting",
+   "incident_type": "cpu_failure",
+   "steps": [
+    "After a CPU takeover, backouts often spike for a few minutes while backups warm up",
+    "Wait 5 minutes and re-check TMFCOM STATUS TMF before taking any action",
+    "If still above 1%, check the audit trail volume, not the application"
+   ],
+   "source_type": "senior_note",
+   "status": "pending",
+   "submitted_by": "sr-rdiaz",
+   "submitted_at": "2026-10-17T15:12",
+   "reviewed_by": null,
+   "reviewed_at": null,
+   "times_used": 0,
+   "note": "New fix from INC-002, not in manuals or existing runbooks. Awaiting review by a second senior (e.g. M. Chen)."
+  },
+  {
+   "id": "RB-044",
+   "title": "Restart $PAY1 instead of switching",
+   "incident_type": "process_loop",
+   "steps": [
+    "STOP $PAY1 and restart it"
+   ],
+   "source_type": "senior_note",
+   "status": "rejected",
+   "submitted_by": "sr-mchen",
+   "submitted_at": "2026-09-30T02:40",
+   "reviewed_by": "sr-rdiaz",
+   "reviewed_at": "2026-09-30T08:05",
+   "times_used": 0,
+   "review_reason": "Stopping the primary drops in-flight payments; SWITCH to the backup is safer (see RB-012)."
+  }
+ ],
+ "note": "Simulated for Catalyst 2026."
+}

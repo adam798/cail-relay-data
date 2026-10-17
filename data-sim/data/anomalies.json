@@ -1,0 +1,40 @@
+[
+ {
+  "start": "2026-10-17T02:14",
+  "end": "2026-10-17T02:31",
+  "minutes": 18,
+  "metrics": [
+   "cpu2_pct",
+   "cpu3_pct",
+   "pay1_queue",
+   "response_ms",
+   "tps"
+  ],
+  "max_score": 0.659,
+  "incident": "INC-001"
+ },
+ {
+  "start": "2026-10-17T14:30",
+  "end": "2026-10-17T15:07",
+  "minutes": 38,
+  "metrics": [
+   "cpu1_pct",
+   "cpu3_pct",
+   "response_ms",
+   "tmf_backout_pct",
+   "tps"
+  ],
+  "max_score": 0.67,
+  "incident": "INC-002"
+ },
+ {
+  "start": "2026-10-17T19:00",
+  "end": "2026-10-17T20:41",
+  "minutes": 102,
+  "metrics": [
+   "disk_data01_pct"
+  ],
+  "max_score": 0.543,
+  "incident": "INC-003"
+ }
+]

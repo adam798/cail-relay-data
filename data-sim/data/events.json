@@ -1,0 +1,212 @@
+[
+ {
+  "time": "2026-10-17T00:00",
+  "severity": "INFO",
+  "subsystem": "TMF",
+  "node": "\\PROD1",
+  "message": "TMF audit trail rollover complete",
+  "incident": null,
+  "source": "Prognosis (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T01:30",
+  "severity": "INFO",
+  "subsystem": "SPOOLER",
+  "node": "\\PROD1",
+  "message": "Nightly batch report printed",
+  "incident": null,
+  "source": "EMS (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T02:14",
+  "severity": "WARN",
+  "subsystem": "CPU 2",
+  "node": "\\PROD1",
+  "message": "Process $PAY1 high CPU usage (96%)",
+  "incident": "INC-001",
+  "source": "MOMI (simulated)",
+  "severity_rank": 2
+ },
+ {
+  "time": "2026-10-17T02:15",
+  "severity": "WARN",
+  "subsystem": "TMF",
+  "node": "\\PROD1",
+  "message": "Transaction rate below threshold (210 tps)",
+  "incident": "INC-001",
+  "source": "Prognosis (simulated)",
+  "severity_rank": 2
+ },
+ {
+  "time": "2026-10-17T02:17",
+  "severity": "WARN",
+  "subsystem": "PATHWAY",
+  "node": "\\PROD1",
+  "message": "Server class PAY-SVR request queue growing",
+  "incident": "INC-001",
+  "source": "Prognosis (simulated)",
+  "severity_rank": 2
+ },
+ {
+  "time": "2026-10-17T02:23",
+  "severity": "INFO",
+  "subsystem": "AUDIT",
+  "node": "\\PROD1",
+  "message": "Operator jr-ops-03 requested senior sign-off for SWITCH $PAY1",
+  "incident": "INC-001",
+  "source": "EMS (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T02:24",
+  "severity": "INFO",
+  "subsystem": "OPERATOR",
+  "node": "\\PROD1",
+  "message": "SWITCH $PAY1 approved by R. Diaz, executed by jr-ops-03",
+  "incident": "INC-001",
+  "source": "EMS (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T02:24",
+  "severity": "INFO",
+  "subsystem": "CPU 3",
+  "node": "\\PROD1",
+  "message": "$PAY1 backup in CPU 3 has taken over",
+  "incident": "INC-001",
+  "source": "ASAP (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T02:34",
+  "severity": "INFO",
+  "subsystem": "TMF",
+  "node": "\\PROD1",
+  "message": "Transaction rate normal (492 tps)",
+  "incident": "INC-001",
+  "source": "Prognosis (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T06:00",
+  "severity": "INFO",
+  "subsystem": "TMF",
+  "node": "\\PROD1",
+  "message": "Online dump started",
+  "incident": null,
+  "source": "Prognosis (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T06:40",
+  "severity": "INFO",
+  "subsystem": "TMF",
+  "node": "\\PROD1",
+  "message": "Online dump complete",
+  "incident": null,
+  "source": "Prognosis (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T14:30",
+  "severity": "CRIT",
+  "subsystem": "CPU 3",
+  "node": "\\PROD1",
+  "message": "CPU 3 down: hardware fault detected",
+  "incident": "INC-002",
+  "source": "ASAP (simulated)",
+  "severity_rank": 1
+ },
+ {
+  "time": "2026-10-17T14:30",
+  "severity": "WARN",
+  "subsystem": "CPU 1",
+  "node": "\\PROD1",
+  "message": "Process pairs taken over from CPU 3",
+  "incident": "INC-002",
+  "source": "MOMI (simulated)",
+  "severity_rank": 2
+ },
+ {
+  "time": "2026-10-17T14:33",
+  "severity": "WARN",
+  "subsystem": "TMF",
+  "node": "\\PROD1",
+  "message": "Backout rate elevated (1.7%)",
+  "incident": "INC-002",
+  "source": "Prognosis (simulated)",
+  "severity_rank": 2
+ },
+ {
+  "time": "2026-10-17T14:40",
+  "severity": "WARN",
+  "subsystem": "CPU 1",
+  "node": "\\PROD1",
+  "message": "CPU 1 sustained load above 90%",
+  "incident": "INC-002",
+  "source": "ASAP (simulated)",
+  "severity_rank": 2
+ },
+ {
+  "time": "2026-10-17T14:55",
+  "severity": "INFO",
+  "subsystem": "OPERATOR",
+  "node": "\\PROD1",
+  "message": "CPU 3 reloaded after hardware support call",
+  "incident": "INC-002",
+  "source": "EMS (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T15:10",
+  "severity": "INFO",
+  "subsystem": "TMF",
+  "node": "\\PROD1",
+  "message": "Backout rate normal",
+  "incident": "INC-002",
+  "source": "Prognosis (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T19:40",
+  "severity": "WARN",
+  "subsystem": "DISK",
+  "node": "\\PROD1",
+  "message": "$DATA01 above 80% capacity",
+  "incident": "INC-003",
+  "source": "ViewSys (simulated)",
+  "severity_rank": 3
+ },
+ {
+  "time": "2026-10-17T20:25",
+  "severity": "WARN",
+  "subsystem": "DISK",
+  "node": "\\PROD1",
+  "message": "$DATA01 above 90% capacity",
+  "incident": "INC-003",
+  "source": "ViewSys (simulated)",
+  "severity_rank": 2
+ },
+ {
+  "time": "2026-10-17T20:40",
+  "severity": "INFO",
+  "subsystem": "OPERATOR",
+  "node": "\\PROD1",
+  "message": "Old audit files purged on $DATA01",
+  "incident": "INC-003",
+  "source": "EMS (simulated)",
+  "severity_rank": 4
+ },
+ {
+  "time": "2026-10-17T23:00",
+  "severity": "INFO",
+  "subsystem": "TMF",
+  "node": "\\PROD1",
+  "message": "TMF audit trail rollover complete",
+  "incident": null,
+  "source": "Prognosis (simulated)",
+  "severity_rank": 4
+ }
+]

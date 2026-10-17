@@ -1,0 +1,83 @@
+{
+ "roles": {
+  "junior_operator": {
+   "label": "Junior Operator",
+   "can_run": [
+    "SAFE"
+   ],
+   "needs_confirmation": [
+    "CAUTION"
+   ],
+   "needs_senior_approval": [
+    "HIGH RISK"
+   ],
+   "can_approve_others": false,
+   "can_add_knowledge": false
+  },
+  "senior_operator": {
+   "label": "Senior Operator",
+   "can_run": [
+    "SAFE",
+    "CAUTION",
+    "HIGH RISK"
+   ],
+   "needs_confirmation": [
+    "CAUTION",
+    "HIGH RISK"
+   ],
+   "needs_senior_approval": [],
+   "can_approve_others": true,
+   "can_add_knowledge": true,
+   "can_review_knowledge": true
+  },
+  "ops_manager": {
+   "label": "Operations Manager",
+   "can_run": [],
+   "needs_confirmation": [],
+   "needs_senior_approval": [],
+   "can_approve_others": false,
+   "can_add_knowledge": true,
+   "can_view_audit_log": true
+  }
+ },
+ "users": [
+  {
+   "id": "jr-ops-03",
+   "name": "Sam Lee",
+   "role": "junior_operator",
+   "shift": "night",
+   "on_call": false
+  },
+  {
+   "id": "sr-rdiaz",
+   "name": "R. Diaz",
+   "role": "senior_operator",
+   "shift": "night",
+   "on_call": true
+  },
+  {
+   "id": "sr-mchen",
+   "name": "M. Chen",
+   "role": "senior_operator",
+   "shift": "day",
+   "on_call": false
+  },
+  {
+   "id": "mgr-kosei",
+   "name": "K. Osei",
+   "role": "ops_manager",
+   "shift": "day",
+   "on_call": false
+  }
+ ],
+ "rules": [
+  "Nothing runs without a human clicking Approve.",
+  "Junior operators can run SAFE (read-only) commands after approving them.",
+  "CAUTION commands need an extra confirmation step.",
+  "HIGH RISK commands from a junior need sign-off from an on-call senior operator.",
+  "Only senior operators can approve another operator's request or submit notes to the knowledge base.",
+  "A new knowledge entry needs a second, different senior to approve it (two-person review).",
+  "Every request, approval, rejection and command is written to the audit log."
+ ],
+ "note": "Simulated for Catalyst 2026. Names are fictional."
+}

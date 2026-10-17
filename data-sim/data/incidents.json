@@ -1,0 +1,44 @@
+[
+ {
+  "id": "INC-001",
+  "title": "Payment server $PAY1 looping on CPU 2",
+  "start": "2026-10-17T02:14",
+  "fix": "2026-10-17T02:24",
+  "end": "2026-10-17T02:34",
+  "severity": "HIGH",
+  "symptoms": "CPU 2 at ~96%, TPS drops to ~210, $PAY1 queue builds to ~1,800, no I/O from $PAY1",
+  "root_cause": "$PAY1 primary process stuck in a loop",
+  "fix_action": "Operator checks STATUS $PAY1, then SWITCH $PAY1 to backup on CPU 3 (senior sign-off)",
+  "demo": true,
+  "first_ems_alert": "2026-10-17T02:14",
+  "first_detected": "2026-10-17T02:14"
+ },
+ {
+  "id": "INC-002",
+  "title": "CPU 3 hardware failure, capacity reduced",
+  "start": "2026-10-17T14:30",
+  "fix": "2026-10-17T14:55",
+  "end": "2026-10-17T15:10",
+  "severity": "CRITICAL",
+  "symptoms": "CPU 3 at 0%, takeover to CPU 1, CPU 1 load ~90%, response time doubles",
+  "root_cause": "CPU 3 hardware fault; process pairs took over on remaining CPUs",
+  "fix_action": "Confirm takeover with PEEK and STATUS, call hardware support, rebalance load (senior)",
+  "demo": false,
+  "first_ems_alert": "2026-10-17T14:30",
+  "first_detected": "2026-10-17T14:30"
+ },
+ {
+  "id": "INC-003",
+  "title": "Disk $DATA01 filling up",
+  "start": "2026-10-17T19:00",
+  "fix": "2026-10-17T20:40",
+  "end": "2026-10-17T20:50",
+  "severity": "MEDIUM",
+  "symptoms": "$DATA01 climbs from ~72% to ~93%",
+  "root_cause": "Audit trail files growing faster than they are purged",
+  "fix_action": "FUP INFO to find large audit files, purge per runbook (caution)",
+  "demo": false,
+  "first_ems_alert": "2026-10-17T19:40",
+  "first_detected": "2026-10-17T19:00"
+ }
+]

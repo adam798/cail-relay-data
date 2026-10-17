@@ -1,0 +1,13 @@
+{
+ "node": "\\PROD1",
+ "start": "2026-10-17T00:00",
+ "end": "2026-10-17T23:59",
+ "minutes": 1440,
+ "detection_method": "rolling z-score + Isolation Forest + trend check",
+ "incidents": 3,
+ "anomaly_windows": 3,
+ "train_day": "2026-10-16",
+ "test_day": "2026-10-17",
+ "iso_threshold": 0.5478989124765548,
+ "note": "All data simulated for Catalyst 2026. Command syntax illustrative; verify against HPE NonStop manuals."
+}

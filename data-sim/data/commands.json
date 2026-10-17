@@ -1,0 +1,135 @@
+{
+ "STATUS $PAY1, DETAIL": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "Show state, load, queue and backup of the payment server process",
+  "source": "TACL Reference Manual: STATUS",
+  "output": {
+   "during_INC-001": [
+    "Process  $PAY1      CPU 2    Pri 150    State RUNNING",
+    "Busy     96%        Msgs queued 1,842",
+    "Last I/O 00:06:12 ago",
+    "Backup   CPU 3      Status READY"
+   ],
+   "normal": [
+    "Process  $PAY1      CPU 3    Pri 150    State RUNNING",
+    "Busy     31%        Msgs queued 12",
+    "Last I/O 00:00:01 ago",
+    "Backup   CPU 2      Status READY"
+   ]
+  }
+ },
+ "PEEK /CPU 2/": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "Show CPU 2 load and memory",
+  "source": "PEEK Reference Manual",
+  "output": {
+   "during_INC-001": [
+    "CPU 2  Busy 96%  Dispatches/s 18,400  Mem used 71%"
+   ],
+   "normal": [
+    "CPU 2  Busy 34%  Dispatches/s 6,200  Mem used 58%"
+   ]
+  }
+ },
+ "PEEK /CPU 3/": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "Show CPU 3 load and memory",
+  "source": "PEEK Reference Manual",
+  "output": {
+   "during_INC-002": [
+    "CPU 3  *** CPU DOWN ***"
+   ],
+   "normal": [
+    "CPU 3  Busy 33%  Dispatches/s 6,050  Mem used 57%"
+   ]
+  }
+ },
+ "SCF STATUS DISK $DATA01": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "Check disk volume health and usage",
+  "source": "SCF Reference Manual: STATUS DISK",
+  "output": {
+   "during_INC-003": [
+    "$DATA01  STARTED  Primary/Mirror OK  Used 93%"
+   ],
+   "normal": [
+    "$DATA01  STARTED  Primary/Mirror OK  Used 72%"
+   ]
+  }
+ },
+ "FUP INFO $DATA01.AUDIT.*": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "List audit files and sizes on $DATA01",
+  "source": "FUP Reference Manual: INFO",
+  "output": {
+   "during_INC-003": [
+    "AA000412   EOF 2,048 MB   Last mod 2026-10-10",
+    "AA000413   EOF 2,048 MB   Last mod 2026-10-11",
+    "AA000414   EOF 1,920 MB   Last mod 2026-10-17"
+   ]
+  }
+ },
+ "TMFCOM STATUS TMF": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "Check the transaction management system",
+  "source": "TMF Reference Manual: TMFCOM",
+  "output": {
+   "during_INC-001": [
+    "TMF STARTED  Transactions/s 210  Backout 0.2%"
+   ],
+   "during_INC-002": [
+    "TMF STARTED  Transactions/s 470  Backout 1.7%"
+   ],
+   "normal": [
+    "TMF STARTED  Transactions/s 492  Backout 0.2%"
+   ]
+  }
+ },
+ "PATHCOM STATUS SERVER PAY-SVR": {
+  "risk": "SAFE",
+  "changes_system": false,
+  "purpose": "Check the payment application server class",
+  "source": "Pathway Reference Manual: PATHCOM",
+  "output": {
+   "during_INC-001": [
+    "PAY-SVR  RUNNING  Links 8  Requests queued 1,842"
+   ],
+   "normal": [
+    "PAY-SVR  RUNNING  Links 8  Requests queued 12"
+   ]
+  }
+ },
+ "SWITCH $PAY1": {
+  "risk": "HIGH RISK",
+  "changes_system": true,
+  "needs_senior": true,
+  "purpose": "Move $PAY1 to its backup process on CPU 3",
+  "impact": "Payments pause about 2 seconds during takeover",
+  "source": "Runbook RB-012 (senior note)",
+  "output": {
+   "during_INC-001": [
+    "$PAY1 primary stopped. Backup in CPU 3 has taken over.",
+    "EMS: Transaction rate normal (492 tps)"
+   ]
+  }
+ },
+ "PURGE $DATA01.AUDIT.AA000412": {
+  "risk": "CAUTION",
+  "changes_system": true,
+  "needs_senior": false,
+  "purpose": "Delete an old audit file that is already archived",
+  "impact": "Irreversible. Only purge files confirmed archived",
+  "source": "Runbook RB-031",
+  "output": {
+   "during_INC-003": [
+    "File purged. $DATA01 Used 81%"
+   ]
+  }
+ }
+}
